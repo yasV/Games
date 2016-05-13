@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class TicTacToeView extends JFrame implements Function{
 
 	private JPanel contentPane;
+	private JLabel _lblPlayer;
 	private TicTacToeController _controller;
 	public JButton _btnNewGame;
 	public JButton _btn11;
@@ -30,24 +31,12 @@ public class TicTacToeView extends JFrame implements Function{
 	public JButton _btn31;
 	public JButton _btn32;
 	public JButton _btn33;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TicTacToeView frame = new TicTacToeView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	
 	public TicTacToeView(TicTacToeController theController){
 		_controller = theController;
 		_controller.setTicTacToeView(this);
+		initialize();
 		addevents();
 	}
 	private void addevents() {
@@ -69,7 +58,7 @@ public class TicTacToeView extends JFrame implements Function{
 	/**
 	 * Create the frame.
 	 */
-	public TicTacToeView() {
+	public void initialize() {
 		setTitle("TICTACTOE");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,45 +83,54 @@ public class TicTacToeView extends JFrame implements Function{
 		panel.setLayout(null);
 		
 		_btn11 = new JButton("");
+		_btn11.setEnabled(false);
 		_btn11.setBounds(10, 11, 64, 66);
 		panel.add(_btn11);
 		
 		_btn21 = new JButton("");
+		_btn21.setEnabled(false);
 		_btn21.setBounds(10, 88, 64, 66);
 		panel.add(_btn21);
 		
 		_btn31 = new JButton("");
+		_btn31.setEnabled(false);
 		_btn31.setBounds(10, 165, 64, 66);
 		panel.add(_btn31);
 		
 		_btn12 = new JButton("");
+		_btn12.setEnabled(false);
 		_btn12.setBounds(84, 11, 64, 66);
 		panel.add(_btn12);
 		
 		_btn22 = new JButton("");
+		_btn22.setEnabled(false);
 		_btn22.setBounds(84, 88, 64, 66);
 		panel.add(_btn22);
 		
 		_btn32 = new JButton("");
+		_btn32.setEnabled(false);
 		_btn32.setBounds(84, 165, 64, 66);
 		panel.add(_btn32);
 		
 		_btn33 = new JButton("");
+		_btn33.setEnabled(false);
 		_btn33.setBounds(158, 165, 64, 66);
 		panel.add(_btn33);
 		
 		_btn23 = new JButton("");
+		_btn23.setEnabled(false);
 		_btn23.setBounds(158, 88, 64, 66);
 		panel.add(_btn23);
 		
 		_btn13 = new JButton("");
+		_btn13.setEnabled(false);
 		_btn13.setBounds(158, 11, 64, 66);
 		panel.add(_btn13);
 		
-		JLabel _lblPlayerOne = new JLabel("Player one");
-		_lblPlayerOne.setFont(new Font("Aharoni", Font.BOLD, 14));
-		_lblPlayerOne.setBounds(393, 31, 89, 14);
-		contentPane.add(_lblPlayerOne);
+		_lblPlayer = new JLabel("Welcome Press New Game");
+		_lblPlayer.setFont(new Font("Aharoni", Font.BOLD, 14));
+		_lblPlayer.setBounds(297, 99, 198, 60);
+		contentPane.add(_lblPlayer);
 	}
 	
 	
@@ -142,5 +140,168 @@ public class TicTacToeView extends JFrame implements Function{
 	
 	public void displayMessage(String message){
 		JOptionPane.showMessageDialog(this, message);
+	}
+	
+	public void startGame(boolean pPlayer){
+		_btn11.setText("");
+		_btn12.setText("");
+		_btn13.setText("");
+		
+		_btn21.setText("");
+		_btn22.setText("");
+		_btn23.setText("");
+		
+		_btn31.setText("");
+		_btn32.setText("");
+		_btn33.setText("");
+		
+		_btn11.setEnabled(true);
+		_btn12.setEnabled(true);
+		_btn13.setEnabled(true);
+		
+		_btn21.setEnabled(true);
+		_btn22.setEnabled(true);
+		_btn23.setEnabled(true);
+		
+		_btn31.setEnabled(true);
+		_btn32.setEnabled(true);
+		_btn33.setEnabled(true);
+		
+		if(pPlayer){
+			this._lblPlayer.setText("Player One is your turn");
+		}
+		else{
+			this._lblPlayer.setText("Player Two is your turn");
+		}
+	}
+	
+	public void continueGame(boolean pPlayer,String pPosition, String pValue){
+		if(pPlayer){
+			this._lblPlayer.setText("Player One is your turn");
+		}
+		else{
+			this._lblPlayer.setText("Player Two is your turn");
+		}
+		
+		switch(pPosition){
+			case"11":
+				_btn11.setEnabled(false);
+				_btn11.setText(pValue);
+				break;
+				
+			case"12":
+				_btn12.setEnabled(false);
+				_btn12.setText(pValue);
+				break;
+				
+			case"13":
+				_btn13.setEnabled(false);
+				_btn13.setText(pValue);
+				break;
+				
+			case"21":
+				_btn21.setEnabled(false);
+				_btn21.setText(pValue);
+				break;
+				
+			case"22":
+				_btn22.setEnabled(false);
+				_btn22.setText(pValue);
+				break;
+				
+			case"23":
+				_btn23.setEnabled(false);
+				_btn23.setText(pValue);
+				break;
+				
+			case"31":
+				_btn31.setEnabled(false);
+				_btn31.setText(pValue);
+				break;
+				
+			case"32":
+				_btn32.setEnabled(false);
+				_btn32.setText(pValue);
+				break;
+				
+			case"33":
+				_btn33.setEnabled(false);
+				_btn33.setText(pValue);
+				break;
+		}
+	}
+	
+	public void endGame(String pMessage, String pPosition,String pValues){
+		String _Message = "";
+		String _Value = "";
+		switch(pMessage){
+			case "one":
+				_Message = "Player One wins";
+				break;
+			case "two":
+				_Message = "Player Two wins";
+				break;
+			case "none":
+				_Message = "Nobody wins";
+				break;
+		}
+		setBottomText(pPosition,pValues);
+		disableBottom();
+		this.displayMessage(_Message);
+		this._lblPlayer.setText("");
+	}
+	
+	public void disableBottom(){
+		_btn11.setEnabled(false);
+		_btn12.setEnabled(false);
+		_btn13.setEnabled(false);
+		
+		_btn21.setEnabled(false);
+		_btn22.setEnabled(false);
+		_btn23.setEnabled(false);
+		
+		_btn31.setEnabled(false);
+		_btn32.setEnabled(false);
+		_btn33.setEnabled(false);
+	}
+	
+	public void setBottomText(String pPosition,String pValue){
+		switch(pPosition){
+		case"11":
+			_btn11.setText(pValue);
+			break;
+			
+		case"12":
+			_btn12.setText(pValue);
+			break;
+			
+		case"13":
+			_btn13.setText(pValue);
+			break;
+			
+		case"21":
+			_btn21.setText(pValue);
+			break;
+			
+		case"22":
+			_btn22.setText(pValue);
+			break;
+			
+		case"23":
+			_btn23.setText(pValue);
+			break;
+			
+		case"31":
+			_btn31.setText(pValue);
+			break;
+			
+		case"32":
+			_btn32.setText(pValue);
+			break;
+			
+		case"33":
+			_btn33.setText(pValue);
+			break;
+	}
 	}
 }
