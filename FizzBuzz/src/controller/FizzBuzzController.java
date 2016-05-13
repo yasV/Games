@@ -22,8 +22,6 @@ public class FizzBuzzController implements ActionListener{
 		return _view;
 	}
 	
-	public void checkOptionSelected(){}
-	
 	@Override
 	public void actionPerformed(ActionEvent _pEvt) {
 		// TODO Auto-generated method stub
